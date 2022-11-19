@@ -8,7 +8,12 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ['inter', 'serif']
-      }
+      }, 
+      colors: {
+        'lavendar': '#D3D5FD',
+        'darkgrey': '#474A56',
+        'lightgrey': '#929AAB'
+      },
     },
   },
   plugins: [],
