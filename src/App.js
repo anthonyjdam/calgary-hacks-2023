@@ -3,10 +3,10 @@ import React from "react";
 function App() {
   return (
     <>
-      <div className="bg-black min-h-screen">
-        <div className="bg-black">
-          <h1>Study tracker</h1>
-          <ul>
+      <div className="bg-black text-white min-h-screen">
+        <div className="p-10 flex flex-row justify-between border-solid border-white border-2">
+          <h1 className="font-semibold text-3xl">study tracker</h1>
+          <ul className="flex flex-row gap-10">
             <li><a href="https://www.google.com/">link1</a></li>
             <li><a href="https://www.google.com/">link2</a></li>
             <li><a href="https://www.google.com/">link3</a></li>
