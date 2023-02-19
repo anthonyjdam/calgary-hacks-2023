@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Map from "./components/Map";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { DataGrid } from '@mui/x-data-grid';
 import Card from '@mui/material/Card'
 
 
 
-
 const indicators = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 
-import { DataGrid } from '@mui/x-data-grid';
 
 async function getData() {
   axios.get('http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json').then(response => console.log(response.data[0].lastupdated))
@@ -55,9 +54,9 @@ function App() {
 
   return (
     <>
-      {/* <div className="flex flex-row bg-black text-white min-h-screen">
+      <div className="flex flex-row bg-black text-white min-h-screen">
 
-        <Sidebar />
+        {/* <Sidebar /> */}
       <div className=" bg-white text-white min-h-screen">
 
         {/* <Sidebar /> */}
@@ -70,7 +69,7 @@ function App() {
         </ul>
       </div>
 
-    </div> * /}
+    </div>
     < header >
         <h1 className="flex justify-between text-4xl font-medium p-5">
           TITLE
