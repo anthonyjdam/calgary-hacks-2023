@@ -2,20 +2,24 @@ import React, { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import axios from "axios";
 
-async function getData() {
-  axios.get('http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json').then(response => console.log(response.data[0].lastupdated))
-}
+import { ComposableMap, Geographies, Geography } from "react-simple-maps"
+
+const geoUrl =
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
+
+
+
 
 function App() {
   useEffect(
     () => {
-      getData()
+      axios.get('http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json').then(response => console.log(response.data[0].lastupdated))
     }
-  , [])
+    , [])
 
   return (
     <>
-      <div className="flex flex-row bg-black text-white min-h-screen">
+      {/* <div className="flex flex-row bg-black text-white min-h-screen">
 
         <Sidebar />
 
@@ -28,7 +32,22 @@ function App() {
           </ul>
         </div>
 
-      </div>
+      </div> */}
+      <header>
+        <h1 className="flex justify-between text-4xl font-medium p-5">
+          TITLE
+          <a>Donate now</a>
+        </h1>
+      </header>
+      <ComposableMap>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography key={geo.rsmKey} geography={geo} />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
     </>
   );
 }
