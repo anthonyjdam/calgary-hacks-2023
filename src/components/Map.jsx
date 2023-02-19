@@ -17,7 +17,12 @@ function Map() {
                             geography={geo}
                             fill="#C9DADC"
                             stroke="#000000"
-                            onClick={() => console.log("click")}
+                            onClick={() => console.log(geographies)}
+                            style={{
+                                default: { outline: "none", fill: "#CFD8DC" },
+                                hover: { outline: "#266DD3", fill: "#266DD3" },
+                                pressed: { outline: "none" },
+                              }}
                         />
                     ))
                 }
