@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
-import Sidebar from "./components/Sidebar";
 import axios from "axios";
-
-import { ComposableMap, Geographies, Geography } from "react-simple-maps"
-
-const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
+import Map from "./components/Map";
 
 
 
 
 function App() {
+
+
+
   useEffect(
     () => {
-      axios.get('http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json').then(response => console.log(response.data[0].lastupdated))
+      axios.get(`http://api.worldbank.org/v2/country/br/indicator/1.1_ACCESS.ELECTRICITY.TOT?format=json`).then(response => console.log(response))
     }
     , [])
 
@@ -39,15 +37,7 @@ function App() {
           <a>Donate now</a>
         </h1>
       </header>
-      <ComposableMap>
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography key={geo.rsmKey} geography={geo} />
-            ))
-          }
-        </Geographies>
-      </ComposableMap>
+      <Map />
     </>
   );
 }
