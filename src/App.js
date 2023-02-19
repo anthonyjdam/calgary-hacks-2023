@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Map from "./components/Map";
+import Card from '@mui/material/Card'
 
 
 
+
+const indicators = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
 
 function App() {
-
-
 
   useEffect(
     () => {
@@ -36,8 +37,20 @@ function App() {
           TITLE
           <a>Donate now</a>
         </h1>
+        <hr />
       </header>
-      <Map />
+      <main className="p-10">
+        <Map className="p-10" />
+        <div className="flex justify-between">
+          {indicators.map((indicator) => {
+            return <Card 
+            className="p-10" 
+            children={
+              indicator.id
+            } />
+          })}
+        </div>
+      </main>
     </>
   );
 }
