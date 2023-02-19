@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Map from "./components/Map";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, CardActions } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
 
 import Card from '@mui/material/Card'
@@ -13,9 +13,9 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 
-const indicators = [{ id: 'Potable Water', photo: "https://images.unsplash.com/photo-1495774539583-885e02cca8c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"}, 
-                    { id: 'Poverty', photo: 'https://bsmedia.business-standard.com/_media/bs/img/article/2022-04/07/full/1649270628-8781.jpg'}, 
-                    { id: 'Out of School', photo: 'https://images.unsplash.com/photo-1533285962792-0c3c5e9cb0d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'}]
+const indicators = [{ id: 'Potable Water', code: "SH.H2O.SMDW.ZS", photo: "https://images.unsplash.com/photo-1495774539583-885e02cca8c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" },
+{ id: 'Poverty', code: "SI.POV.NAHC", photo: 'https://bsmedia.business-standard.com/_media/bs/img/article/2022-04/07/full/1649270628-8781.jpg' },
+{ id: 'Out of School', code: "SE.PRM.UNER", photo: 'https://images.unsplash.com/photo-1533285962792-0c3c5e9cb0d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' }]
 
 
 const columns = [
@@ -55,15 +55,20 @@ function DataTable(props) {
 
 
 function ActionAreaCard(prop1) {
+  function handleButtonClick() {
+    const handle = prop1.func
+    handle(prop1.code)
+  }
+
   return (
-    
+
     <Card sx={{ maxWidth: 600 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
           // image="/static/images/cards/contemplative-reptile.jpg"
-          image = {prop1.photo}
+          image={prop1.photo}
           alt=""
         />
         <CardContent>
@@ -74,6 +79,9 @@ function ActionAreaCard(prop1) {
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography> */}
+        <CardActions>
+          <Button onClick={()=>handleButtonClick()}>GET</Button>
+        </CardActions>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -119,15 +127,15 @@ function App() {
 
           {indicators.map((indicator) => {
 
-            return <ActionAreaCard indicator_id={indicator.id} photo={indicator.photo} />
+            return <ActionAreaCard func={handleFetch} inicator={indicator.code} indicator_id={indicator.id} photo={indicator.photo} />
           })}
 
         </div>
-
+        <button className="mx-12"  onClick={() => handleFetch("SH.H2O.SMDW.ZS")}>Fetch water data</button>
+        <button className="mx-12" onClick={() => handleFetch("SI.POV.NAHC")}>Fetch poverty data</button>
+        <button className="mx-12" onClick={() => handleFetch("SE.PRM.UNER")}>Fetch education data</button>
         <DataTable rows={rows} columns={columns} />
-        <button onClick={() => handleFetch("SH.H2O.SMDW.ZS")}>Fetch water data</button>
-        <button onClick={() => handleFetch("SI.POV.NAHC")}>Fetch poverty data</button>
-        <button onClick={() => handleFetch("SE.PRM.UNER")}>Fetch education data</button>
+
 
       </main>
     </>
