@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Map from "./components/Map";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
@@ -10,12 +10,8 @@ import Card from '@mui/material/Card'
 const indicators = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
 
 
-async function getData() {
-  axios.get('http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json').then(response => console.log(response.data[0].lastupdated))
-}
-
 const columns = [
-  { field: 'country', headerName: 'Country', width: 90 },
+  { field: 'country', headerName: 'Country', width: 200 },
   { field: 'id', headerName: 'Indicator', width: 90 },
   {
     field: 'pop',
@@ -23,18 +19,22 @@ const columns = [
     type: 'number',
     width: 95,
   },
+  {
+    field: 'date',
+    headerName: 'Date',
+    type: 'number',
+    width: 95,
+  },
 ];
 
-const rows = [
-  { id: 1, county: 'Mexico', pop: '212112' },
-  { id: 2, county: 'Romania', pop: '222222' },
-];
 
-function DataTable() {
+
+
+function DataTable(props) {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={props.rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -46,15 +46,26 @@ function DataTable() {
 
 function App() {
 
-  useEffect(
-    () => {
-      axios.get(`http://api.worldbank.org/v2/country/br/indicator/1.1_ACCESS.ELECTRICITY.TOT?format=json`).then(response => console.log(response))
-    }
-    , [])
+  const [rows, setRows] = useState([]);
+
+  function handleFetch() {
+    axios.get(`http://api.worldbank.org/v2/country/all/indicator/SH.H2O.SMDW.ZS?format=json&date=2020&per_page=1000`)
+      .then(response => {
+        const countries = response.data[1]
+        const validCountries = countries.filter(country => country.value !== null)
+        const formattedCountries = validCountries.map(entry => {
+          const formattedCountry = { country: entry.country.value, id: entry.country.id, pop: entry.value, date: entry.date }
+          return formattedCountry
+        })
+        setRows(formattedCountries)
+        console.log("fetch");
+      }
+      )
+  }
 
   return (
     <>
-    < header >
+      < header >
         <h1 className="flex justify-between text-4xl font-medium p-5">
           TITLE
           <a>Donate now</a>
@@ -65,14 +76,15 @@ function App() {
         <Map className="p-10" />
         <div className="flex justify-between">
           {indicators.map((indicator) => {
-            return <Card 
-            className="p-10" 
-            children={
-              indicator.id
-            } />
+            return <Card
+              className="p-10"
+              children={
+                indicator.id
+              } />
           })}
         </div>
-        <DataTable/>
+        <DataTable rows={rows} columns={columns} />
+        <button onClick={() => handleFetch()}>Fetch</button>
       </main>
 
     </>
