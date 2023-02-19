@@ -1,28 +1,37 @@
-#GiveWithInsite
+# GiveWithInsite
+![alt text](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/393/490/datas/original.png)
 
-##The problem
+## The problem
 World Bank Offers a vast catalogue of data that is vital for research and facilitating prosperity across the globe.
 
 While it is important to analyze the data and draw conclusions from it, many online tools don't empower users to  create change without the right tools or extensive knowledge of data research
 
-##Solution
+## Solution
 To bridge this gap in the industry, GiveWithInsite  is a solution that makes data actionable by enabling its users to view information around the world and donate to foundations based on data insights
 
-##What it does
+## What it does
 GiveWithInsite is a tool that works with the Data Bank API to access critical information on international data
 
 Our website brings this information right to you in a neat format so you can analyze it and also make decisions based on the data without sifting through heaps of information.
 
 As a result, you are able to identify which locations are in most need of certain resources and we'll help you find organizations that work locally to help address those needs
 
-##Inspiration
+## Inspiration
 Many can agree that its difficult to make use of the excess resources in our lives like unused clothes or school supplies
 
 However, it's challenging to liberate ourselves from these materials when we don't know where they should go
 
 So we match you with organizations based on what you have to offer and on the data measured from countries that are in need of these resources
 
-#How to Run
+![alt text](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/393/488/datas/gallery.jpg)
+
+![alt text](https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/393/489/datas/gallery.jpg)
+
+**View us on `Devpost`**
+https://devpost.com/software/givewithinsite
+***
+
+# How to Run
 
 ## Getting Started with Create React App
 
